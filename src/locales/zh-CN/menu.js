@@ -1,8 +1,16 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-24 10:58:44
+ * @LastEditTime: 2020-12-31 11:03:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \AntDesignPro\src\locales\zh-CN\menu.js
+ */
 export default {
   'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
-  'menu.admin': '管理页',
+  'menu.admin': '管理员',
   'menu.admin.sub-page': '二级管理页',
   'menu.login': '登录',
   'menu.register': '注册',
@@ -22,7 +30,7 @@ export default {
   'menu.form.step-form.result': '分步表单（完成）',
   'menu.form.advanced-form': '高级表单',
   'menu.list': '列表页',
-  'menu.list.table-list': '查询表格',
+  'menu.list.table-list': '订单',
   'menu.list.basic-list': '标准列表',
   'menu.list.card-list': '卡片列表',
   'menu.list.search-list': '搜索列表',
@@ -49,4 +57,10 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  
+  'menu.list.customer-list':'顾客',
+  'menu.list.setting-list':'设置',
+  'menu.goods':'商品',
+  'menu.goods.商品列表':'商品列表',
+  'menu.goods.分类列表':'分类列表',
 };

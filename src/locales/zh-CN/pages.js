@@ -1,5 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-24 10:58:44
+ * @LastEditTime: 2021-01-04 11:21:53
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \AntDesignPro\src\locales\zh-CN\pages.js
+ */
 export default {
-  'pages.layouts.userLayout.title': 'Ant Design 是西湖区最具影响力的 Web 设计规范',
+  'pages.layouts.userLayout.title': '趣购物是闽江学院最大的网上购物平台！',
   'pages.login.accountLogin.tab': '账户密码登录',
   'pages.login.accountLogin.errorMessage': '错误的用户名和密码（admin/ant.design)',
   'pages.login.username.placeholder': '用户名: admin or user',
@@ -44,7 +52,7 @@ export default {
   'pages.searchTable.titleDesc': '描述',
   'pages.searchTable.ruleName': '规则名称为必填项',
   'pages.searchTable.titleCallNo': '服务调用次数',
-  'pages.searchTable.titleStatus': '状态',
+  'pages.searchTable.titleStatus': '订单状态',
   'pages.searchTable.nameStatus.default': '关闭',
   'pages.searchTable.nameStatus.running': '运行中',
   'pages.searchTable.nameStatus.online': '已上线',
@@ -67,5 +75,6 @@ export default {
   'pages.searchTable.orderTotal':'订单金额',
   'pages.searchTable.fulfillmentStatus':'发货状态',
   'pages.searchTable.unfulfilled':'未发货',
-  'pages.searchTable.fulfilled':'已发货'
+  'pages.searchTable.fulfilled':'已发货',
+  'pages.searchTable.modifiedTime':'订单修改时间'
 };

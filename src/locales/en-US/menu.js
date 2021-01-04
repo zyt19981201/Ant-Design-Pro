@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-24 10:58:44
+ * @LastEditTime: 2020-12-31 11:04:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \AntDesignPro\src\locales\en-US\menu.js
+ */
 export default {
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
@@ -49,4 +57,7 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+
+  'menu.goods.商品列表':'Product list',
+  'menu.goods.分类列表':'Category list',
 };

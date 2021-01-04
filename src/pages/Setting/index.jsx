@@ -8,11 +8,6 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { query as queryOrder } from '@/services/order';
-import { DatePicker, Space } from 'antd';
-
-const { RangePicker } = DatePicker;
-
 /**
  * 添加节点
  * @param fields
@@ -66,7 +61,7 @@ const handleRemove = async (selectedRows) => {
 
   try {
     await removeRule({
-      key: selectedRows.x((row) => row.key),
+      key: selectedRows.map((row) => row.key),
     });
     hide();
     message.success('删除成功，即将刷新');
@@ -101,12 +96,12 @@ const TableList = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.updateForm.name"
-          defaultMessage="订单编号"
+          id="pages.searchTable.updateForm.ruleName.nameLabel"
+          defaultMessage="规则名称"
         />
       ),
-      dataIndex: 'number',
-      // tip: '订单编号',
+      dataIndex: 'name',
+      tip: '规则名称是唯一的 key',
       render: (dom, entity) => {
         return (
           <a
@@ -121,71 +116,81 @@ const TableList = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
-      dataIndex: 'paid_date',
+      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="描述" />,
+      dataIndex: 'desc',
+      valueType: 'textarea',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
-      dataIndex: 'post_modified',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
-      dataIndex: 'order_total',
+      title: <FormattedMessage id="pages.searchTable.titleCallNo" defaultMessage="服务调用次数" />,
+      dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
-      renderText: (val, item) => `${item.order_currency}${val}`
+      renderText: (val) =>
+        `${val}${intl.formatMessage({
+          id: 'pages.searchTable.tenThousand',
+          defaultMessage: ' 万 ',
+        })}`,
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
-      dataIndex: 'post_status',
+      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
+      dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        "wc-cancelled": {
+        0: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="已取消" />
+            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="关闭" />
           ),
-          status: 'wc-cancelled',
+          status: 'Default',
         },
-        "wc-processing": {
+        1: {
           text: (
             <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
           ),
-          status: 'wc-processing',
+          status: 'Processing',
         },
-        "wc-completed": {
+        2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="完成" />
+            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="已上线" />
           ),
-          status: 'wc-completed',
+          status: 'Success',
         },
-        "wc-pending": {
+        3: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="待处理" />
+            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="异常" />
           ),
-          status: 'wc-pending',
+          status: 'Error',
         },
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.fulfillmentStatus" defaultMessage="发货状态" />,
-      dataIndex: 'fulfillment_status',
-      hideInForm: true,
-      valueEnum: {
-        "fulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
-          ),
-          status: 'fulfilled',
-        },
-        "unfulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
-          ),
-          status: 'unfulfilled',
-        },
+      title: (
+        <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
+      ),
+      sorter: true,
+      dataIndex: 'updatedAt',
+      valueType: 'dateTime',
+      renderFormItem: (item, { defaultRender, ...rest }, form) => {
+        const status = form.getFieldValue('status');
+
+        if (`${status}` === '0') {
+          return false;
+        }
+
+        if (`${status}` === '3') {
+          return (
+            <Input
+              {...rest}
+              placeholder={intl.formatMessage({
+                id: 'pages.searchTable.exception',
+                defaultMessage: '请输入异常原因！',
+              })}
+            />
+          );
+        }
+
+        return defaultRender(item);
       },
     },
-
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
@@ -200,6 +205,9 @@ const TableList = () => {
         >
           <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
         </a>,
+        <a key="subscribeAlert" href="https://procomponents.ant.design/">
+          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
+        </a>,
       ],
     },
   ];
@@ -211,7 +219,7 @@ const TableList = () => {
           defaultMessage: '查询表格',
         })}
         actionRef={actionRef}
-        rowKey={v=>v.ID}
+        rowKey="key"
         search={{
           labelWidth: 120,
         }}
@@ -226,11 +234,7 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={async (params, sorter, filter) => {
-          const res = await queryOrder({ ...params, sorter, filter })
-          return { data: res.data, success: true, total: 100 }
-        }
-        }
+        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -309,10 +313,10 @@ const TableList = () => {
               ),
             },
           ]}
-          width="m"
+          width="md"
           name="name"
         />
-        <ProFormTextArea width="m" name="desc" />
+        <ProFormTextArea width="md" name="desc" />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {

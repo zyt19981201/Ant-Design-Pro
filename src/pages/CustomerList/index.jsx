@@ -9,9 +9,6 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import { query as queryOrder } from '@/services/order';
-import { DatePicker, Space } from 'antd';
-
-const { RangePicker } = DatePicker;
 
 /**
  * 添加节点
@@ -106,7 +103,7 @@ const TableList = () => {
         />
       ),
       dataIndex: 'number',
-      // tip: '订单编号',
+      tip: '订单编号',
       render: (dom, entity) => {
         return (
           <a
@@ -123,10 +120,7 @@ const TableList = () => {
     {
       title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
       dataIndex: 'paid_date',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
-      dataIndex: 'post_modified',
+
     },
     {
       title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
@@ -136,7 +130,7 @@ const TableList = () => {
       renderText: (val, item) => `${item.order_currency}${val}`
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
+      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
       dataIndex: 'post_status',
       hideInForm: true,
       valueEnum: {
