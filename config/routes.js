@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2020-12-31 11:21:22
+ * @LastEditTime: 2021-01-05 10:12:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\config\routes.js
@@ -54,14 +54,12 @@ export default [{
                 routes: [{
                     path: '/goods/list',
                     name: '商品列表',
-                    icon: 'smile',
                     component: './Products',
                     authority: ['admin'],
                   },
                   {
                     path: '/goods/category',
                     name: '分类列表',
-                    icon: 'smile',
                     component: './Category',
                     authority: ['admin'],
                   },

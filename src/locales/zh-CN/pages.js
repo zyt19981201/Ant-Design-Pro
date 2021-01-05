@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-04 11:21:53
+ * @LastEditTime: 2021-01-05 09:46:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\locales\zh-CN\pages.js
@@ -76,5 +76,10 @@ export default {
   'pages.searchTable.fulfillmentStatus':'发货状态',
   'pages.searchTable.unfulfilled':'未发货',
   'pages.searchTable.fulfilled':'已发货',
-  'pages.searchTable.modifiedTime':'订单修改时间'
+  'pages.searchTable.modifiedTime':'订单修改时间',
+  'pages.searchTable.payMethod':'付款方式',
+  'pages.searchTable.paypal':'paypal',
+  'pages.searchTable.credit':'credit',
+  'pages.searchTable.worldpay':'worldpay',
+  'pages.searchTable.xborderpay':'xborderpay',
 };

@@ -8,6 +8,11 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
+import { query as queryOrder } from '@/services/order';
+import { DatePicker, Space } from 'antd';
+
+const { RangePicker } = DatePicker;
+
 /**
  * 添加节点
  * @param fields
@@ -61,7 +66,7 @@ const handleRemove = async (selectedRows) => {
 
   try {
     await removeRule({
-      key: selectedRows.map((row) => row.key),
+      key: selectedRows.x((row) => row.key),
     });
     hide();
     message.success('删除成功，即将刷新');
@@ -96,12 +101,12 @@ const TableList = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.updateForm.ruleName.nameLabel"
-          defaultMessage="规则名称"
+          id="pages.searchTable.updateForm.name"
+          defaultMessage="订单编号"
         />
       ),
-      dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
+      dataIndex: 'number',
+      // tip: '订单编号',
       render: (dom, entity) => {
         return (
           <a
@@ -115,80 +120,72 @@ const TableList = () => {
         );
       },
     },
+    
     {
-      title: <FormattedMessage id="pages.searchTable.titleDesc" defaultMessage="描述" />,
-      dataIndex: 'desc',
-      valueType: 'textarea',
+      title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
+      valueType:'dateRange',
+      dataIndex: 'paid_date',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleCallNo" defaultMessage="服务调用次数" />,
-      dataIndex: 'callNo',
+      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
+      // valueType:'dateRange',
+      dataIndex: 'post_modified',
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
+      dataIndex: 'order_total',
       sorter: true,
       hideInForm: true,
-      renderText: (val) =>
-        `${val}${intl.formatMessage({
-          id: 'pages.searchTable.tenThousand',
-          defaultMessage: ' 万 ',
-        })}`,
+      renderText: (val, item) => `${item.order_currency}${val}`
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
-      dataIndex: 'status',
+      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
+      dataIndex: 'post_status',
       hideInForm: true,
       valueEnum: {
-        0: {
+        "wc-cancelled": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="关闭" />
+            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="已取消" />
           ),
-          status: 'Default',
+          status: 'wc-cancelled',
         },
-        1: {
+        "wc-processing": {
           text: (
             <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
           ),
-          status: 'Processing',
+          status: 'wc-processing',
         },
-        2: {
+        "wc-completed": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="已上线" />
+            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="完成" />
           ),
-          status: 'Success',
+          status: 'wc-completed',
         },
-        3: {
+        "wc-pending": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="异常" />
+            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="待处理" />
           ),
-          status: 'Error',
+          status: 'wc-pending',
         },
       },
     },
     {
-      title: (
-        <FormattedMessage id="pages.searchTable.titleUpdatedAt" defaultMessage="上次调度时间" />
-      ),
-      sorter: true,
-      dataIndex: 'updatedAt',
-      valueType: 'dateTime',
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-
-        if (`${status}` === '0') {
-          return false;
-        }
-
-        if (`${status}` === '3') {
-          return (
-            <Input
-              {...rest}
-              placeholder={intl.formatMessage({
-                id: 'pages.searchTable.exception',
-                defaultMessage: '请输入异常原因！',
-              })}
-            />
-          );
-        }
-
-        return defaultRender(item);
+      title: <FormattedMessage id="pages.searchTable.fulfillmentStatus" defaultMessage="发货状态" />,
+      dataIndex: 'fulfillment_status',
+      hideInForm: true,
+      valueEnum: {
+        "fulfilled": {
+          text: (
+            <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
+          ),
+          status: 'fulfilled',
+        },
+        "unfulfilled": {
+          text: (
+            <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
+          ),
+          status: 'unfulfilled',
+        },
       },
     },
     {
@@ -205,11 +202,39 @@ const TableList = () => {
         >
           <FormattedMessage id="pages.searchTable.config" defaultMessage="配置" />
         </a>,
-        <a key="subscribeAlert" href="https://procomponents.ant.design/">
-          <FormattedMessage id="pages.searchTable.subscribeAlert" defaultMessage="订阅警报" />
-        </a>,
       ],
     },
+    // {
+    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
+    //   dataIndex: 'payment_method_title',
+    //   hideInForm: true,
+    //   valueEnum: {
+    //     "paypal": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
+    //       ),
+    //       status: 'paypal',
+    //     },
+    //     "credit": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
+    //       ),
+    //       status: 'credit',
+    //     },
+    //     "worldpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
+    //       ),
+    //       status: 'worldpay',
+    //     },
+    //     "xborderpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
+    //       ),
+    //       status: 'xborderpay',
+    //     },
+    //   },
+    // },
   ];
   return (
     <PageContainer>
@@ -219,7 +244,7 @@ const TableList = () => {
           defaultMessage: '查询表格',
         })}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey={v=>v.ID}
         search={{
           labelWidth: 120,
         }}
@@ -234,7 +259,11 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        request={async (params, sorter, filter) => {
+          const res = await queryOrder({ ...params, sorter, filter })
+          return { data: res.data, success: true, total: 100 }
+        }
+        }
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -313,10 +342,10 @@ const TableList = () => {
               ),
             },
           ]}
-          width="md"
+          width="m"
           name="name"
         />
-        <ProFormTextArea width="md" name="desc" />
+        <ProFormTextArea width="m" name="desc" />
       </ModalForm>
       <UpdateForm
         onSubmit={async (value) => {

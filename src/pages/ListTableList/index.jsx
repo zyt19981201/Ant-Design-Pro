@@ -120,12 +120,16 @@ const TableList = () => {
         );
       },
     },
+    
     {
       title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
+      valueType:'dateRange',
       dataIndex: 'paid_date',
+      render: (val, item) => { return item.paid_date;}
     },
     {
       title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
+      // valueType:'dateRange',
       dataIndex: 'post_modified',
     },
     {
@@ -185,7 +189,6 @@ const TableList = () => {
         },
       },
     },
-
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
@@ -202,6 +205,37 @@ const TableList = () => {
         </a>,
       ],
     },
+    // {
+    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
+    //   dataIndex: 'payment_method_title',
+    //   hideInForm: true,
+    //   valueEnum: {
+    //     "paypal": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
+    //       ),
+    //       status: 'paypal',
+    //     },
+    //     "credit": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
+    //       ),
+    //       status: 'credit',
+    //     },
+    //     "worldpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
+    //       ),
+    //       status: 'worldpay',
+    //     },
+    //     "xborderpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
+    //       ),
+    //       status: 'xborderpay',
+    //     },
+    //   },
+    // },
   ];
   return (
     <PageContainer>
