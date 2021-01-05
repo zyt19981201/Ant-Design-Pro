@@ -129,8 +129,9 @@ const TableList = () => {
     },
     {
       title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
-      // valueType:'dateRange',
+      valueType:'dateRange',
       dataIndex: 'post_modified',
+      render: (val, item) => { return item.post_modified;}
     },
     {
       title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
