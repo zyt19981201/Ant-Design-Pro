@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage,history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
@@ -111,8 +111,9 @@ const TableList = () => {
         return (
           <a
             onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
+              // setCurrentRow(entity);
+              // setShowDetail(true);
+              history.push('/list/allOrder/11');
             }}
           >
             {dom}
@@ -137,7 +138,7 @@ const TableList = () => {
       title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
       dataIndex: 'order_total',
       sorter: true,
-      hideInForm: true,
+      // hideInForm: true,
       renderText: (val, item) => `${item.order_currency}${val}`
     },
     {

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 11:50:36
- * @LastEditTime: 2021-01-05 09:55:45
+ * @LastEditTime: 2021-01-05 11:03:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\services\order.js
@@ -26,7 +26,7 @@ export async function query({
   }
 
   if (sorter) {
-    console.log(sorter);
+    // console.log(sorter);
     const sort = sorter.order_total === 'ascend' ? 'date' : '-date'
     params.sort = sort
   }

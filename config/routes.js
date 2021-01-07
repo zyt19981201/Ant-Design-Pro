@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-05 10:12:20
+ * @LastEditTime: 2021-01-07 11:01:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\config\routes.js
@@ -42,7 +42,21 @@ export default [{
                 name: 'list.table-list',
                 icon: 'file-text',
                 path: '/list',
-                component: './ListTableList',
+                // component: './ListTableList',
+                routes: [{
+                  path: '/list/allOrder',
+                  name: '订单列表',
+                  component: './ListTableList',
+                  authority: ['admin'],
+                },
+                {
+                  path: '/list/allOrder/:id',
+                  name: '订单详情',
+                  component: './ListTableList/Detail',
+                  hideInMenu:true,
+                  authority: ['admin'],
+                },
+              ],
               },
               // 商品
               {
