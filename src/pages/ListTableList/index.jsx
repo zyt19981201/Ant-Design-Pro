@@ -111,9 +111,10 @@ const TableList = () => {
         return (
           <a
             onClick={() => {
+              // console.log('2222', dom, entity)
               // setCurrentRow(entity);
               // setShowDetail(true);
-              history.push('/list/allOrder/11');
+              history.push(`/list/allOrder/${entity.ID}`);
             }}
           >
             {dom}
@@ -264,6 +265,7 @@ const TableList = () => {
         ]}
         request={async (params, sorter, filter) => {
           const res = await queryOrder({ ...params, sorter, filter })
+          console.log(res);
           return { data: res.data, success: true, total: 100 }
         }
         }

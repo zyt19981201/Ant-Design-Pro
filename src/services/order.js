@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 11:50:36
- * @LastEditTime: 2021-01-05 11:03:18
+ * @LastEditTime: 2021-01-11 10:15:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\services\order.js
@@ -68,4 +68,9 @@ export async function query({
   return request('/api/admin/orders', {
     params
   });
+}
+
+export async function queryID(ID){
+ const res =await request(`/api/admin/orders/${ID}`);
+  return res
 }

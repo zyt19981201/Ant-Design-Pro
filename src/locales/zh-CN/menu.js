@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2020-12-31 11:03:09
+ * @LastEditTime: 2021-01-11 10:38:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\locales\zh-CN\menu.js
@@ -63,4 +63,8 @@ export default {
   'menu.goods':'商品',
   'menu.goods.商品列表':'商品列表',
   'menu.goods.分类列表':'分类列表',
+  'menu.order':'订单',
+  'menu.order.list':'订单列表',
+  'menu.order.detail':'订单详情',
+
 };
