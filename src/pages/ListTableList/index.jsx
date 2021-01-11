@@ -8,7 +8,8 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { query as queryOrder } from '@/services/order';
+import { query as queryOrder } from '@/services/order'; 
+
 
 /**
  * 添加节点
@@ -119,6 +120,7 @@ const TableList = () => {
     },
     {
       title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
+      valueType:'dateRange',
       dataIndex: 'paid_date',
 
     },
@@ -209,6 +211,7 @@ const TableList = () => {
         search={{
           labelWidth: 120,
         }}
+        dateFormatter="string"
         toolBarRender={() => [
           <Button
             type="primary"

@@ -14,6 +14,7 @@ export default [
           },
         ],
       },
+      
       {
         path: '/',
         component: '../layouts/SecurityLayout',
@@ -33,6 +34,7 @@ export default [
                 icon: 'smile',
                 component: './Welcome',
               },
+               
               {
                 path: '/admin',
                 name: 'admin',
@@ -54,6 +56,12 @@ export default [
                 icon: 'table',
                 path: '/list',
                 component: './ListTableList',
+              },
+              {
+                name: 'account.settings',
+                icon: 'setting',
+                path: '/setting',
+                component: './Setting',
               },
               {
                 component: './404',

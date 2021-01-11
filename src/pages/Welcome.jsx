@@ -1,63 +1,56 @@
-import React from 'react';
+import React , { Component }from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Alert, Typography } from 'antd';
+import { Typography, Col,Row } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
-import styles from './Welcome.less';
-
-const CodePreview = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+import styles from './Welcome.less'; 
+import ProCard from '@ant-design/pro-card';
+import { Line } from '@ant-design/charts';
+import DayBuys from '@/components/Charts/DayBuys';
+// const CodePreview = ({ children }) => (
+//   <pre className={styles.pre}>
+//     <code>
+//       <Typography.Text copyable>{children}</Typography.Text>
+//     </code>
+//   </pre>
+// );
 
 export default () => {
   const intl = useIntl();
+  const data = [
+    { year: '1991', value: 3 },
+    { year: '1992', value: 4 },
+    { year: '1993', value: 3.5 },
+    { year: '1994', value: 5 },
+    { year: '1995', value: 4.9 },
+    { year: '1996', value: 6 },
+    { year: '1997', value: 7 },
+    { year: '1998', value: 9 },
+    { year: '1999', value: 13 },
+  ];
+
+  const config = {
+    data,
+    width: 350,
+    height:230,
+    xField: 'year',
+    yField: 'value',
+    point: {
+      size: 5,
+      shape: 'diamond',
+    },
+  };
   return (
-    <PageContainer>
-      <Card>
-        <Alert
-          message={intl.formatMessage({
-            id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
-          })}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-table</CodePreview>
-        <Typography.Text
-          strong
-          style={{
-            marginBottom: 12,
-          }}
-        >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
-          <a
-            href="https://procomponents.ant.design/components/layout"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            <FormattedMessage id="pages.welcome.link" defaultMessage="欢迎使用" />
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
-      </Card>
+    <PageContainer>  
+        <ProCard direction="row" gutter={[0,8]} ghost>
+          <ProCard colSpan={12} layout="center" bordered title="总销售额" tooltip="商品总销售额"> 
+            <Line {...config} />
+          </ProCard>
+          <ProCard colSpan={12} layout="center" bordered>
+            <DayBuys/>
+          </ProCard>
+        </ProCard>
+       
+      
     </PageContainer>
   );
 };
