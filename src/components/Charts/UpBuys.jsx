@@ -2,14 +2,14 @@ import { Chart, Line } from 'bizcharts';
 import { Typography, Col, Row, Button, Tabs, Card } from 'antd';
 import React from "react"
 const data = [
-  { year: '1951 年', sales: 45 },
-  { year: '1952 年', sales: 47 },
-  { year: '1956 年', sales: 49 },
-  { year: '1957 年', sales: 57 },
-  { year: '1958 年', sales: 46 },
-  { year: '1959 年', sales: 66 },
-  { year: '1960 年', sales: 49 },
-  { year: '1962 年', sales: 67 },
+  { year: '2014 年', sales: 45 },
+  { year: '2015 年', sales: 47 },
+  { year: '2016 年', sales: 49 },
+  { year: '2017 年', sales: 57 },
+  { year: '2018 年', sales: 60 },
+  { year: '2019 年', sales: 66 },
+  { year: '2020 年', sales: 59 },
+  { year: '2021 年', sales: 51 },
 ];
 
 

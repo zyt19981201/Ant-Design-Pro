@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-11 10:38:06
+ * @LastEditTime: 2021-01-12 15:57:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\locales\zh-CN\menu.js
@@ -58,7 +58,10 @@ export default {
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
   
-  'menu.list.customer-list':'顾客',
+  'menu.customer':'顾客',
+  'menu.customer.list':'顾客列表',
+  'menu.customer.detail':'顾客详情',
+  
   'menu.list.setting-list':'设置',
   'menu.goods':'商品',
   'menu.goods.商品列表':'商品列表',

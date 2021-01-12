@@ -208,37 +208,6 @@ const TableList = () => {
         </a>,
       ],
     },
-    // {
-    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
-    //   dataIndex: 'payment_method_title',
-    //   hideInForm: true,
-    //   valueEnum: {
-    //     "paypal": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
-    //       ),
-    //       status: 'paypal',
-    //     },
-    //     "credit": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
-    //       ),
-    //       status: 'credit',
-    //     },
-    //     "worldpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
-    //       ),
-    //       status: 'worldpay',
-    //     },
-    //     "xborderpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
-    //       ),
-    //       status: 'xborderpay',
-    //     },
-    //   },
-    // },
   ];
   return (
     <PageContainer>

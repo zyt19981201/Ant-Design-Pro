@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Card, Col, Row,  Button, Divider} from 'antd';
-import { query as queryOrder } from '@/services/order';
+import { query as queryCustomers } from '@/services/customer';
 
 const { Header, Footer, Sider, Content } = Layout;
 import { useIntl, FormattedMessage } from 'umi';
-import { queryID } from '@/services/order';
+import { queryID } from '@/services/customer';
 import { Table, Tag, Space } from 'antd';
 
 

@@ -8,7 +8,7 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { query as queryOrder } from '@/services/order';
+import { query as queryOrder } from '@/services/customer';
 import { DatePicker, Space } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -101,20 +101,17 @@ const TableList = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.updateForm.name"
-          defaultMessage="订单编号"
+          id="pages.searchTable.updateForm.userID"
+          defaultMessage="顾客编号"
         />
       ),
-      dataIndex: 'number',
+      dataIndex: 'ID',
       // tip: '订单编号',
       render: (dom, entity) => {
         return (
           <a
             onClick={() => {
-              // console.log('2222', dom, entity)
-              // setCurrentRow(entity);
-              // setShowDetail(true);
-              history.push(`/list/allOrder/${entity.ID}`);
+              history.push(`/customer/allCustomer/${entity.ID}`);
             }}
           >
             {dom}
@@ -122,75 +119,48 @@ const TableList = () => {
         );
       },
     },
-    
     {
-      title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
-      valueType:'dateRange',
-      dataIndex: 'paid_date',
-      render: (val, item) => { return item.paid_date;}
+      title: <FormattedMessage id="pages.searchTable.user_nicename" defaultMessage="用户昵称  " />,
+      dataIndex: 'user_nicename',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
-      valueType:'dateRange',
-      dataIndex: 'post_modified',
-      render: (val, item) => { return item.post_modified;}
+      title: <FormattedMessage id="pages.searchTable.user_email" defaultMessage="用户邮箱" />,
+      dataIndex: 'user_email',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
+      title: <FormattedMessage id="pages.searchTable.phone" defaultMessage="手机号" />,
+      dataIndex: 'phone',
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.country" defaultMessage="国家" />,
+      dataIndex: 'country',
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.subscribed" defaultMessage="订阅状态" />,
+      dataIndex: 'subscribed',
+      hideInForm: true,
+      valueEnum: {
+        "true": {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.true" defaultMessage="已订阅" />
+          ),
+          status: 'true',
+        },
+        "false": {
+          text: (
+            <FormattedMessage id="pages.searchTable.nameStatus.false" defaultMessage="未订阅" />
+          ),
+          status: 'false',
+        },
+      },
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.order_count" defaultMessage="订单数量" />,
+      dataIndex: 'order_count',
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.order_total" defaultMessage="订单总金额" />,
       dataIndex: 'order_total',
-      sorter: true,
-      // hideInForm: true,
-      renderText: (val, item) => `${item.order_currency}${val}`
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
-      dataIndex: 'post_status',
-      hideInForm: true,
-      valueEnum: {
-        "wc-cancelled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="已取消" />
-          ),
-          status: 'wc-cancelled',
-        },
-        "wc-processing": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
-          ),
-          status: 'wc-processing',
-        },
-        "wc-completed": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="完成" />
-          ),
-          status: 'wc-completed',
-        },
-        "wc-pending": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="待处理" />
-          ),
-          status: 'wc-pending',
-        },
-      },
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.fulfillmentStatus" defaultMessage="发货状态" />,
-      dataIndex: 'fulfillment_status',
-      hideInForm: true,
-      valueEnum: {
-        "fulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
-          ),
-          status: 'fulfilled',
-        },
-        "unfulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
-          ),
-          status: 'unfulfilled',
-        },
-      },
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
@@ -208,37 +178,6 @@ const TableList = () => {
         </a>,
       ],
     },
-    // {
-    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
-    //   dataIndex: 'payment_method_title',
-    //   hideInForm: true,
-    //   valueEnum: {
-    //     "paypal": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
-    //       ),
-    //       status: 'paypal',
-    //     },
-    //     "credit": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
-    //       ),
-    //       status: 'credit',
-    //     },
-    //     "worldpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
-    //       ),
-    //       status: 'worldpay',
-    //     },
-    //     "xborderpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
-    //       ),
-    //       status: 'xborderpay',
-    //     },
-    //   },
-    // },
   ];
   return (
     <PageContainer>

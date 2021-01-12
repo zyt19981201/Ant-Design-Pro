@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-05 09:46:46
+ * @LastEditTime: 2021-01-12 16:30:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\locales\zh-CN\pages.js
@@ -82,4 +82,14 @@ export default {
   'pages.searchTable.credit':'credit',
   'pages.searchTable.worldpay':'worldpay',
   'pages.searchTable.xborderpay':'xborderpay',
+  'pages.searchTable.updateForm.userID':'顾客编号',
+  'pages.searchTable.user_nicename':'用户昵称',
+  'pages.searchTable.user_email':'用户邮箱',
+  'pages.searchTable.phone':'手机号',
+  'pages.searchTable.subscribed':'订阅状态',
+  'pages.searchTable.order_total':'订单总金额',
+  'pages.searchTable.nameStatus.true':'已订阅',
+  'pages.searchTable.nameStatus.false':'未订阅',
+  'pages.searchTable.country':'国家',
+  'pages.searchTable.order_count':'订单数量'
 };

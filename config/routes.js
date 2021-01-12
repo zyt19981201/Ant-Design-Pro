@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-12 10:30:31
+ * @LastEditTime: 2021-01-12 15:46:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\config\routes.js
@@ -81,11 +81,26 @@ export default [{
               },
               // 顾客
               {
-                name: 'list.customer-list',
+                name: 'customer',
                 icon: 'user',
                 path: '/customer',
                 component: './CustomerList',
+                routes: [{
+                  path: '/customer/allCustomer',
+                  name: 'list',
+                  component: './CustomerList',
+                  authority: ['admin'],
+                },
+                {
+                  path: '/customer/allCustomer/:id',
+                  name: 'detail',
+                  component: './CustomerList/Detail',
+                  hideInMenu:true,
+                  authority: ['admin'],
+                },
+              ],
               },
+
               // 管理员
               // {
               //   path: '/admin',
