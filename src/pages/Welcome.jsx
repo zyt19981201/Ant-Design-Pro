@@ -63,11 +63,8 @@ export default () => {
           </ProCard>
         </ProCard>
         <Row >
-           
-            <UpOrder/>
-          
+          <UpOrder/>
         </Row>
-      
     </PageContainer>
   );
 };
