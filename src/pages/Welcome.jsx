@@ -10,6 +10,8 @@ import OrdersNum from '@/components/Charts/OrdersNum';
 import UsersNum from '@/components/Charts/UsersNum';
 import UndeliveredOrders from '@/components/Charts/UndeliveredOders';
 import UpOrder from '@/components/Charts/UpOder';
+import UpUser from '@/components/Charts/UpUser';
+import UpBuys from '@/components/Charts/UpBuys';
 
 
 // const CodePreview = ({ children }) => (
@@ -62,12 +64,18 @@ export default () => {
             <UndeliveredOrders/>
           </ProCard>
         </ProCard>
-        <Row >
-           
-            <UpOrder/>
-          
+        <Row gutter={[0,18]}>
+           <Col span={24}><UpOrder/>
+           </Col> 
         </Row>
-      
+      <Row gutter={[18,0]}>
+        <Col span={12}>
+          <UpUser/>
+        </Col>
+        <Col span={12}>
+           <UpBuys/>
+        </Col>
+      </Row>
     </PageContainer>
   );
 };

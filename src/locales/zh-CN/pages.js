@@ -67,5 +67,7 @@ export default {
   'pages.searchTable.orderTotal':'订单金额',
   'pages.searchTable.fulfillmentStatus':'发货状态',
   'pages.searchTable.unfulfilled':'未发货',
-  'pages.searchTable.fulfilled':'已发货'
+  'pages.searchTable.fulfilled':'已发货',
+  // 'pages.setting.wuliu':'物流方案',
+  // 'page.setting.newPassword':'修改密码'
 };

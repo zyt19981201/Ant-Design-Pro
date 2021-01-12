@@ -1,5 +1,5 @@
-import { Chart, Interval } from 'bizcharts';
-import { Typography, Col,Row,Button,Tabs,Card,DatePicker } from 'antd';
+import { Chart, Line } from 'bizcharts';
+import { Typography, Col,Row,Button,Tabs,Card } from 'antd';
 import React from "react"
 const data = [
   { year: '1951 年', sales: 38 },
@@ -10,19 +10,18 @@ const data = [
   { year: '1959 年', sales: 38 },
   { year: '1960 年', sales: 38 },
   { year: '1962 年', sales: 38 },
-];
-const operations = <DatePicker.RangePicker />;
+]; 
 
 
-const UpOrder=()=> {
+const UpBuys=()=> {
 
   return (
     
 <Card>
-<Tabs tabBarExtraContent={operations}>
-        <Tabs.TabPane tab="订单趋势" key="1">
+<Tabs>
+        <Tabs.TabPane tab="销售额日增涨" key="1">
             <Chart height={300} autoFit data={data} >
-                <Interval position="year*sales"  />
+                <Line shape="smooth" position="year*sales"  />
             </Chart> 
         </Tabs.TabPane>
          
@@ -31,4 +30,4 @@ const UpOrder=()=> {
     
   )
 }
-export default UpOrder
+export default UpBuys
