@@ -229,11 +229,9 @@ export default () => {
 
   return (
     <Layout>
-      <Layout>
-        <Content>
-          <div className="site-card-wrapper">
-            <Row gutter={16}>
-              <Col span={23} style={{ margin: '10px' }}>
+      <Layout >
+            <Row >
+              <Col span={18} style={{ margin: '10px' }}>
                 <span>
                   订单编号:
                 </span>
@@ -241,27 +239,18 @@ export default () => {
                   {res.ID}
                 </span>
               </Col>
-              <Col span={23} style={{ margin: '10px' }}>
+              <Col span={18} style={{ margin: '10px' }}>
                 <Card title="商品详情" bordered={false}>
                   <Table pagination={false} dataSource={dataSource0} columns={columns0} />
                 </Card>
-              </Col>
-              <Col span={23} style={{ margin: '10px' }}>
                 <Card title="订单总览" bordered={true}>
                   <Table pagination={false} dataSource={dataSource1} columns={columns1} />
                 </Card>
-              </Col>
-              <Col span={23} style={{ margin: '10px' }}>
                 <Card title="订单详情" bordered={false}>
                   <Table pagination={false} dataSource={dataSource2} columns={columns2} />
                 </Card>
               </Col>
-            </Row>
-          </div>,
-        </Content>
-        <Sider style={{ backgroundColor: '#F0F2F5',width:'500' }}>
-          <Button type="primary" style={{marginLeft:'10px',marginBottom:'10px'}}>发货</Button>
-          <Col style={{ margin: '10px' }}>
+              <Col style={{ margin: '10px' }} span={5}>
             <Card title="订单信息" bordered={false}>
               <div>
                 <span>订单状态:{res.post_status}</span>
@@ -293,9 +282,11 @@ export default () => {
               </div>             
             </Card>
           </Col>
-        </Sider>
+            </Row>
+            <Row type="flex" justify="center" align="middle" style={{marginTop:'10px'}}>
+              <Button type="primary" >发货</Button>
+            </Row>
       </Layout>
     </Layout>
-
   );
 }
