@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage,history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
@@ -9,6 +9,9 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import { query as queryOrder } from '@/services/order';
+import { DatePicker, Space } from 'antd';
+
+const { RangePicker } = DatePicker;
 
 /**
  * 添加节点
@@ -103,13 +106,15 @@ const TableList = () => {
         />
       ),
       dataIndex: 'number',
-      tip: '订单编号',
+      // tip: '订单编号',
       render: (dom, entity) => {
         return (
           <a
             onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
+              // console.log('2222', dom, entity)
+              // setCurrentRow(entity);
+              // setShowDetail(true);
+              history.push(`/list/allOrder/${entity.ID}`);
             }}
           >
             {dom}
@@ -117,20 +122,28 @@ const TableList = () => {
         );
       },
     },
+    
     {
       title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
+      valueType:'dateRange',
       dataIndex: 'paid_date',
-
+      render: (val, item) => { return item.paid_date;}
+    },
+    {
+      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
+      valueType:'dateRange',
+      dataIndex: 'post_modified',
+      render: (val, item) => { return item.post_modified;}
     },
     {
       title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
       dataIndex: 'order_total',
       sorter: true,
-      hideInForm: true,
+      // hideInForm: true,
       renderText: (val, item) => `${item.order_currency}${val}`
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="状态" />,
+      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
       dataIndex: 'post_status',
       hideInForm: true,
       valueEnum: {
@@ -179,7 +192,6 @@ const TableList = () => {
         },
       },
     },
-
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
       dataIndex: 'option',
@@ -196,6 +208,37 @@ const TableList = () => {
         </a>,
       ],
     },
+    // {
+    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
+    //   dataIndex: 'payment_method_title',
+    //   hideInForm: true,
+    //   valueEnum: {
+    //     "paypal": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
+    //       ),
+    //       status: 'paypal',
+    //     },
+    //     "credit": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
+    //       ),
+    //       status: 'credit',
+    //     },
+    //     "worldpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
+    //       ),
+    //       status: 'worldpay',
+    //     },
+    //     "xborderpay": {
+    //       text: (
+    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
+    //       ),
+    //       status: 'xborderpay',
+    //     },
+    //   },
+    // },
   ];
   return (
     <PageContainer>
@@ -222,6 +265,7 @@ const TableList = () => {
         ]}
         request={async (params, sorter, filter) => {
           const res = await queryOrder({ ...params, sorter, filter })
+          console.log(res);
           return { data: res.data, success: true, total: 100 }
         }
         }
