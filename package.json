@@ -1,5 +1,5 @@
 {
-  "name": "ant-design-pro",
+  "name": "shopping",
   "version": "4.5.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
@@ -45,7 +45,6 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@ant-design/charts": "^1.0.13",
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-card": "^1.9.7",
     "@ant-design/pro-descriptions": "^1.0.19",
@@ -53,7 +52,9 @@
     "@ant-design/pro-layout": "^6.5.0",
     "@ant-design/pro-table": "^2.9.16",
     "@umijs/route-utils": "^1.0.33",
+    "ant-design-pro": "^2.3.2",
     "antd": "^4.9.2",
+    "bizcharts": "^4.0.17",
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
