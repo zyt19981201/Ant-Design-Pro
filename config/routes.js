@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-11 10:37:45
+ * @LastEditTime: 2021-01-12 10:30:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\config\routes.js
@@ -29,13 +29,13 @@ export default [{
               // 主页
               {
                 path: '/',
-                redirect: '/home',
+                redirect: '/welcome',
               },
               {
-                path: '/home',
-                name: 'home',
-                icon: 'home',
-                component: './Home',
+                path: '/welcome',
+                name: 'welcome',
+                icon: 'smile',
+                component: './Welcome',
               },
               // 订单
               {
