@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-12 16:54:05
+ * @LastEditTime: 2021-01-13 15:31:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\config\routes.js
@@ -63,18 +63,32 @@ export default [{
                 path: '/goods',
                 name: 'goods',
                 icon: 'bars',
-                // component: './Products',
                 authority: ['admin'],
                 routes: [{
-                    path: '/goods/list',
-                    name: '商品列表',
-                    component: './Products',
+                    path: '/goods/allProducts',
+                    name: 'list',
+                    component: './Product',
                     authority: ['admin'],
                   },
                   {
-                    path: '/goods/category',
-                    name: '分类列表',
+                    path: '/goods/allProducts/:id',
+                    name: 'detail',
+                    component: './Product/Detail',
+                    hideInMenu:true,
+                    authority: ['admin'],
+                  },
+
+                  {
+                    path: '/goods/allCategory',
+                    name: 'category',
                     component: './Category',
+                    authority: ['admin'],
+                  },
+                  {
+                    path: '/goods/allCategory/:id',
+                    name: 'categoryDetail',
+                    component: './Category/Detail',
+                    hideInMenu:true,
                     authority: ['admin'],
                   },
                 ],

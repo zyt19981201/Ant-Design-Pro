@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Col, Row,  Button, Divider} from 'antd';
-import { query as queryCustomers } from '@/services/customer';
+import { Layout, Card, Col, Row, Button, Divider } from 'antd';
+import { query as queryProducts } from '@/services/products';
 
 const { Header, Footer, Sider, Content } = Layout;
 import { useIntl, FormattedMessage } from 'umi';
-import { queryID } from '@/services/customer';
+import { queryID } from '@/services/products';
 import { Table, Tag, Space } from 'antd';
 
 
@@ -26,73 +26,83 @@ export default () => {
   const dataSource0 = [
     {
       key: '1',
-      order_item_id:res?.line_items&&res.line_items[0]?.order_item_id,
-      order_item_name:res?.line_items&&res.line_items[0]?.order_item_name,
-      price:res?.line_items&&res.line_items[0]?.price,
-      qty:res?.line_items&&res.line_items[0]?.qty + '件',
-      line_subtotal_tax:res?.line_items&&res.line_items[0]?.line_subtotal_tax
+      ID: res?.ID,
+      title: res?.title,
+      max_price: '$ ' + res?.max_price,
+      min_price: '$ ' + res?.min_price,
+      max_discount: res?.max_discount + '折',
+      sale_price: '$ ' + res?.sale_price
     },
   ];
   const columns0 = [
     {
       title: '商品编号',
-      dataIndex: 'order_item_id',
+      dataIndex: 'ID',
       key: 'order_item_id',
       align: 'center'
     },
     {
-      title: '商品名称',
-      dataIndex: 'order_item_name',
-      key: 'order_item_name',
+      title: '商品标题',
+      dataIndex: 'title',
+      key: 'title',
       align: 'center'
     },
     {
-      title: '商品价格',
-      dataIndex: 'price',
-      key: 'price',
+      title: '最高价格',
+      dataIndex: 'max_price',
+      key: 'max_price',
       align: 'center'
     },
     {
-      title: '件数',
-      dataIndex: 'qty',
-      key: 'qty',
+      title: '最低价格',
+      dataIndex: 'min_price',
+      key: 'min_price',
       align: 'center'
     },
     {
-      title: '优惠金额',
-      dataIndex: 'line_subtotal_tax',
-      key: 'line_subtotal_tax',
+      title: '最大折扣',
+      dataIndex: 'max_discount',
+      key: 'max_discount',
+      align: 'center'
+    },
+    {
+      title: '售价',
+      dataIndex: 'sale_price',
+      key: 'sale_price',
       align: 'center'
     },
   ];
 
-  // 订单总览
+  // 商品发布信息
   const dataSource1 = [
     {
       key: '1',
-      number: res.number,
-      name: res.post_name,
+      post_author: res.post_author,
+      post_name:res?.post_name,
+      post_title:res.post_title,
       post_date: res.post_date,
-      status: res.post_status,
-      methods: res.payment_method_title,
-      order_shipping: res.order_currency + res.order_shipping,
-      order_total: res.order_currency + res.order_total,
-      date: res.paid_date,
-      username: res.billing_user_name,
-      note:res.note,
+      post_date_gmt: res.post_date_gmt,
+      post_modified: res.post_modified,
+      post_status: res.post_status,
     },
   ];
   const columns1 = [
     {
-      title: '订单号',
-      dataIndex: 'number',
-      key: 'number',
+      title: '发布者',
+      dataIndex: 'post_author',
+      key: 'post_author',
       align: 'center'
     },
     {
       title: '发布名称',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'post_name',
+      key: 'post_name',
+      align: 'center'
+    },
+    {
+      title: '发布标题',
+      dataIndex: 'post_title',
+      key: 'post_title',
       align: 'center'
     },
     {
@@ -102,45 +112,21 @@ export default () => {
       align: 'center'
     },
     {
-      title: '订单状态',
-      dataIndex: 'status',
-      key: 'status',
+      title: '发布日期时区',
+      dataIndex: 'post_date_gmt',
+      key: 'post_date_gmt',
       align: 'center'
     },
     {
-      title: '付款方式',
-      dataIndex: 'methods',
-      key: 'methods',
+      title: '修改时间',
+      dataIndex: 'post_modified',
+      key: 'post_modified',
       align: 'center'
     },
     {
-      title: '物流费用',
-      dataIndex: 'order_shipping',
-      key: 'order_shipping',
-      align: 'center'
-    },
-    {
-      title: '订单总价',
-      dataIndex: 'order_total',
-      key: 'order_total',
-      align: 'center'
-    },
-    {
-      title: '付款日期',
-      dataIndex: 'date',
-      key: 'date',
-      align: 'center'
-    },
-    {
-      title: '账单用户名',
-      dataIndex: 'username',
-      key: 'username',
-      align: 'center'
-    },
-    {
-      title: '买家备注',
-      dataIndex: 'note',
-      key: 'note',
+      title: '状态',
+      dataIndex: 'post_status',
+      key: 'post_status',
       align: 'center'
     },
   ];
@@ -210,82 +196,30 @@ export default () => {
     },
   ];
 
-  // 账单地址
-  const dataSource3 = [
-    {
-      key: '1',
-
-    }
-  ];
-  const columns3 = [
-    {
-      title: '名字',
-      dataIndex: 'first_name',
-      key: 'first_name',
-      align: 'center'
-    },
-  ];
-
-
   return (
     <Layout>
       <Layout >
-            <Row >
-              <Col span={18} style={{ margin: '10px' }}>
-                <span>
-                  订单编号:
+        <Row gutter={[16, 48]}>
+          <Col span={24} style={{ margin: '10px' }}>
+            <span>
+              商品编号:
                 </span>
-                <span>
-                  {res.ID}
-                </span>
-              </Col>
-              <Col span={18} style={{ margin: '10px' }}>
-                <Card title="商品详情" bordered={false}>
-                  <Table pagination={false} dataSource={dataSource0} columns={columns0} />
-                </Card>
-                <Card title="订单总览" bordered={true}>
-                  <Table pagination={false} dataSource={dataSource1} columns={columns1} />
-                </Card>
-                <Card title="订单详情" bordered={false}>
-                  <Table pagination={false} dataSource={dataSource2} columns={columns2} />
-                </Card>
-              </Col>
-              <Col style={{ margin: '10px' }} span={5}>
-            <Card title="订单信息" bordered={false}>
-              <div>
-                <span>订单状态:{res.post_status}</span>
-              </div>
-              <div>
-              <span>订单金额:{'$' + res.order_total}</span>
-              </div>
-              <Divider />
-              <div>
-                <span>订单编号:{res.number}</span>
-              </div>
-              <div>
-                <span>事务编号:{res.transaction_id}</span>
-              </div>
-              <div>
-                <span>付款方式:{res.payment_method_title}</span>
-              </div>
-              <div>
-                <span>生成时间:{res.post_date}</span>
-              </div> 
-              <div>
-                <span>付款时间:{res.paid_date}</span>
-              </div>
-              <div>
-                <span>订单物流:{'$' + res.order_shipping}</span>
-              </div>
-              <div>
-                <span>买家备注:{res.note}</span>
-              </div>             
+            <span>
+              {res.ID}
+            </span>
+          </Col>
+          <Col span={24} style={{ margin: '10px' }}>
+            <Card title="商品详情" bordered={false}>
+              <Table pagination={false} dataSource={dataSource0} columns={columns0} />
+            </Card>
+            <Card title="商品发布信息" bordered={true}>
+              <Table pagination={false} dataSource={dataSource1} columns={columns1} />
             </Card>
           </Col>
-            </Row>
-            <Row type="flex" justify="center" align="middle" style={{marginTop:'10px'}}>
-              <Button type="primary" >发货</Button>
-            </Row>
+        </Row>
+        <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
+          <Button type="primary" >发货</Button>
+        </Row>
       </Layout>
     </Layout>
   );

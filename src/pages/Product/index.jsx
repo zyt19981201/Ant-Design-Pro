@@ -1,14 +1,14 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage,history } from 'umi';
+import { useIntl, FormattedMessage, history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { query as queryOrder } from '@/services/customer';
+import { query as queryOrder } from '@/services/products';
 import { DatePicker, Space } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -101,17 +101,16 @@ const TableList = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.updateForm.userID"
-          defaultMessage="顾客编号"
+          id="pages.searchTable.updateForm.productID"
+          defaultMessage="商品编号"
         />
       ),
       dataIndex: 'ID',
-      // tip: '订单编号',
       render: (dom, entity) => {
         return (
           <a
             onClick={() => {
-              history.push(`/customer/allCustomer/${entity.ID}`);
+              history.push(`/goods/allProducts/${entity.ID}`);
             }}
           >
             {dom}
@@ -120,47 +119,44 @@ const TableList = () => {
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.user_nicename" defaultMessage="用户昵称  " />,
-      dataIndex: 'user_nicename',
+      title: <FormattedMessage id="pages.searchTable.post_name" defaultMessage="商品名称" />,
+      dataIndex: 'post_name',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.user_email" defaultMessage="用户邮箱" />,
-      dataIndex: 'user_email',
+      title: <FormattedMessage id="pages.searchTable.title" defaultMessage="商品标题" />,
+      dataIndex: 'title',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.phone" defaultMessage="手机号" />,
-      dataIndex: 'phone',
+      title: <FormattedMessage id="pages.searchTable.sale_price" defaultMessage="商品售价" />,
+      dataIndex: 'sale_price',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.country" defaultMessage="国家" />,
-      dataIndex: 'country',
+      title: <FormattedMessage id="pages.searchTable.stock" defaultMessage="库存" />,
+      dataIndex: 'stock',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.subscribed" defaultMessage="订阅状态" />,
-      dataIndex: 'subscribed',
+      title: <FormattedMessage id="pages.searchTable.backorders" defaultMessage="是否缺货" />,
+      dataIndex: 'backorders',
       hideInForm: true,
       valueEnum: {
-        "true": {
+        "yes": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.true" defaultMessage="已订阅" />
+            <FormattedMessage id="pages.searchTable.nameStatus.yes" defaultMessage="缺货" />
           ),
-          status: 'true',
+          status: 'yes',
         },
-        "false": {
+        "no": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.false" defaultMessage="未订阅" />
+            <FormattedMessage id="pages.searchTable.nameStatus.no" defaultMessage="库存" />
           ),
-          status: 'false',
+          status: 'no',
         },
       },
     },
     {
-      title: <FormattedMessage id="pages.searchTable.order_count" defaultMessage="订单数量" />,
-      dataIndex: 'order_count',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.order_total" defaultMessage="订单总金额" />,
-      dataIndex: 'order_total',
+      title: <FormattedMessage id="pages.searchTable.weight" defaultMessage="重量" />,
+      dataIndex: 'weight',
+      renderText: (val, item) => { if (val) return `${val}  ${item.weight_unit}` }
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
@@ -187,7 +183,7 @@ const TableList = () => {
           defaultMessage: '查询表格',
         })}
         actionRef={actionRef}
-        rowKey={v=>v.ID}
+        rowKey={v => v.ID}
         search={{
           labelWidth: 120,
         }}

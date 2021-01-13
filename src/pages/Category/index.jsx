@@ -1,14 +1,14 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import { query as queryOrder } from '@/services/order';
+import { query as queryOrder } from '@/services/categories';
 import { DatePicker, Space } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -101,18 +101,16 @@ const TableList = () => {
     {
       title: (
         <FormattedMessage
-          id="pages.searchTable.updateForm.name"
-          defaultMessage="订单编号"
+          id="pages.searchTable.updateForm.term_taxonomy_id"
+          defaultMessage="分类编号"
         />
       ),
-      dataIndex: 'number',
-      // tip: '订单编号',
+      dataIndex: 'term_taxonomy_id',
       render: (dom, entity) => {
         return (
           <a
             onClick={() => {
-              setCurrentRow(entity);
-              setShowDetail(true);
+              history.push(`/goods/allCategory/${entity.term_taxonomy_id}`);
             }}
           >
             {dom}
@@ -120,73 +118,25 @@ const TableList = () => {
         );
       },
     },
-    
     {
-      title: <FormattedMessage id="pages.searchTable.paidTime" defaultMessage="付款时间  " />,
-      valueType:'dateRange',
-      dataIndex: 'paid_date',
+      title: <FormattedMessage id="pages.searchTable.taxonomy" defaultMessage="分类" />,
+      dataIndex: 'taxonomy',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.modifiedTime" defaultMessage="订单修改时间" />,
-      // valueType:'dateRange',
-      dataIndex: 'post_modified',
+      title: <FormattedMessage id="pages.searchTable.name" defaultMessage="名字" />,
+      dataIndex: 'name',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.orderTotal" defaultMessage="订单金额" />,
-      dataIndex: 'order_total',
-      sorter: true,
-      hideInForm: true,
-      renderText: (val, item) => `${item.order_currency}${val}`
+      title: <FormattedMessage id="pages.searchTable.description" defaultMessage="描述" />,
+      dataIndex: 'description',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.titleStatus" defaultMessage="订单状态" />,
-      dataIndex: 'post_status',
-      hideInForm: true,
-      valueEnum: {
-        "wc-cancelled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="已取消" />
-          ),
-          status: 'wc-cancelled',
-        },
-        "wc-processing": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
-          ),
-          status: 'wc-processing',
-        },
-        "wc-completed": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="完成" />
-          ),
-          status: 'wc-completed',
-        },
-        "wc-pending": {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="待处理" />
-          ),
-          status: 'wc-pending',
-        },
-      },
+      title: <FormattedMessage id="pages.searchTable.product_count" defaultMessage="产品数量" />,
+      dataIndex: 'product_count',
     },
     {
-      title: <FormattedMessage id="pages.searchTable.fulfillmentStatus" defaultMessage="发货状态" />,
-      dataIndex: 'fulfillment_status',
-      hideInForm: true,
-      valueEnum: {
-        "fulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
-          ),
-          status: 'fulfilled',
-        },
-        "unfulfilled": {
-          text: (
-            <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
-          ),
-          status: 'unfulfilled',
-        },
-      },
+      title: <FormattedMessage id="pages.searchTable.seo_title" defaultMessage="SEO标题" />,
+      dataIndex: 'seo_title',
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="操作" />,
@@ -204,37 +154,6 @@ const TableList = () => {
         </a>,
       ],
     },
-    // {
-    //   title: <FormattedMessage id="pages.searchTable.payMethod" defaultMessage="付款方式" />,
-    //   dataIndex: 'payment_method_title',
-    //   hideInForm: true,
-    //   valueEnum: {
-    //     "paypal": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.paypal" defaultMessage="paypal" />
-    //       ),
-    //       status: 'paypal',
-    //     },
-    //     "credit": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.credit" defaultMessage="credit" />
-    //       ),
-    //       status: 'credit',
-    //     },
-    //     "worldpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.worldpay" defaultMessage="worldpay" />
-    //       ),
-    //       status: 'worldpay',
-    //     },
-    //     "xborderpay": {
-    //       text: (
-    //         <FormattedMessage id="pages.searchTable.xborderpay" defaultMessage="xborderpay" />
-    //       ),
-    //       status: 'xborderpay',
-    //     },
-    //   },
-    // },
   ];
   return (
     <PageContainer>
@@ -244,7 +163,7 @@ const TableList = () => {
           defaultMessage: '查询表格',
         })}
         actionRef={actionRef}
-        rowKey={v=>v.ID}
+        rowKey={v => v.ID}
         search={{
           labelWidth: 120,
         }}
@@ -261,6 +180,7 @@ const TableList = () => {
         ]}
         request={async (params, sorter, filter) => {
           const res = await queryOrder({ ...params, sorter, filter })
+          console.log(res);
           return { data: res.data, success: true, total: 100 }
         }
         }

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-12-24 10:58:44
- * @LastEditTime: 2021-01-12 16:30:34
+ * @LastEditTime: 2021-01-13 15:11:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \AntDesignPro\src\locales\zh-CN\pages.js
@@ -91,5 +91,21 @@ export default {
   'pages.searchTable.nameStatus.true':'已订阅',
   'pages.searchTable.nameStatus.false':'未订阅',
   'pages.searchTable.country':'国家',
-  'pages.searchTable.order_count':'订单数量'
+  'pages.searchTable.order_count':'订单数量',
+  'pages.searchTable.updateForm.productID':'商品编号',
+  'pages.searchTable.post_name':'商品名称',
+  'pages.searchTable.title':'商品标题',
+  'pages.searchTable.sale_price':'商品售价',
+  'pages.searchTable.stock':'库存',
+  'pages.searchTable.backorders':'是否缺货',
+  'pages.searchTable.nameStatus.yes':'缺货',
+  'pages.searchTable.nameStatus.no':'库存',
+  'pages.searchTable.weight':'重量',
+  'pages.searchTable.updateForm.term_taxonomy_id':'分类编号',
+  'pages.searchTable.taxonomy':'分类',
+  'pages.searchTable.description':'描述',
+  'pages.searchTable.name':'名字',
+  'pages.searchTable.product_count':'产品数量',
+  'pages.searchTable.seo_title':'SEO标题',
+
 };
