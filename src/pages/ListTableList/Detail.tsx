@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Col, Row, Button, Divider } from 'antd';
+import { Layout, Card, Col, Row, Button, Divider, Modal,Input } from 'antd';
 import { query as queryOrder } from '@/services/order';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -9,6 +9,20 @@ import { Table, Tag, Space } from 'antd';
 
 
 export default () => {
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
 
   const [ID, setID] = useState(window.location.href?.substring(window.location.href?.lastIndexOf("/") + 1));
@@ -234,78 +248,79 @@ export default () => {
 
 
   return (
-    <Layout>
-      <Layout >
-        <Row >
-          <Col span={18} style={{ margin: '10px' }}>
-            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>
-              订单编号:
-                </span>
-            <span style={{ fontSize: '16px' }}>
-              {res.ID}
+    <Layout >
+      <Row >
+        <Col span={18} style={{ margin: '10px' }}>
+          <span style={{ fontWeight: 'bold', fontSize: '24px' }}>
+            订单编号:
             </span>
-          </Col>
-          <Col span={18} style={{ margin: '10px' }}>
-            <Card title="商品详情" bordered={false} >
-              <span style={{marginLeft:'70px'}}>商品图片:</span>
-              {res?.line_items && res?.line_items[0] && res?.line_items[0]?.feature_image && res?.line_items[0]?.feature_image.thumbnail &&  <img src={res?.line_items[0]?.feature_image.thumbnail} style={{ width: '100px', height: '100px',marginLeft:'50px' }} />}
-              <Divider />
-              <Table pagination={false} dataSource={dataSource0} columns={columns0} />
-            </Card>
-            <Card title="订单总览" bordered={true}>
-              <Table pagination={false} dataSource={dataSource1} columns={columns1} />
-            </Card>
-            <Card title="订单详情" bordered={false}>
-              <Table pagination={false} dataSource={dataSource2} columns={columns2} />
-            </Card>
-          </Col>
-          <Col style={{ margin: '10px' }} span={5}>
-            <Card title="订单信息" bordered={false}>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单状态:</span>
-                <span style={{fontSize:'14px'}}>{res.post_status}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单金额:</span>
-                <span style={{fontSize:'14px'}}>{'$' + res.order_total}</span>
-              </div>
-              <Divider />
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单编号:</span>
-                <span style={{fontSize:'14px'}}>{res.number}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>事务编号:</span>
-                <span style={{fontSize:'14px'}}>{res.transaction_id}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>付款方式:</span>
-                <span style={{fontSize:'14px'}}>{res.payment_method_title}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>生成时间:</span>
-                <span style={{fontSize:'14px'}}>{res.post_date}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>付款时间:</span>
-                <span style={{fontSize:'14px'}}>{res.paid_date}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单物流:</span>
-                <span style={{fontSize:'14px'}}>{'$' + res.order_shipping}</span>
-              </div>
-              <div>
-                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>买家备注:</span>
-                <span style={{fontSize:'14px'}}>{res.note}</span>
-              </div>
-            </Card>
-          </Col>
+          <span style={{ fontSize: '16px' }}>
+            {res.ID}
+          </span>
+        </Col>
+        <Col span={18} style={{ margin: '10px' }}>
+          <Card title="商品详情" bordered={false} >
+            <span style={{ marginLeft: '70px' }}>商品图片:</span>
+            {res?.line_items && res?.line_items[0] && res?.line_items[0]?.feature_image && res?.line_items[0]?.feature_image.thumbnail && <img src={res?.line_items[0]?.feature_image.thumbnail} style={{ width: '100px', height: '100px', marginLeft: '50px' }} />}
+            <Divider />
+            <Table pagination={false} dataSource={dataSource0} columns={columns0} />
+          </Card>
+          <Card title="订单总览" bordered={true}>
+            <Table pagination={false} dataSource={dataSource1} columns={columns1} />
+          </Card>
+          <Card title="订单详情" bordered={false}>
+            <Table pagination={false} dataSource={dataSource2} columns={columns2} />
+          </Card>
+        </Col>
+        <Col style={{ margin: '10px' }} span={5}>
+          <Card title="订单信息" bordered={false}>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>订单状态:</span>
+              <span style={{ fontSize: '14px' }}>{res.post_status}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>订单金额:</span>
+              <span style={{ fontSize: '14px' }}>{'$' + res.order_total}</span>
+            </div>
+            <Divider />
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>订单编号:</span>
+              <span style={{ fontSize: '14px' }}>{res.number}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>事务编号:</span>
+              <span style={{ fontSize: '14px' }}>{res.transaction_id}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>付款方式:</span>
+              <span style={{ fontSize: '14px' }}>{res.payment_method_title}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>生成时间:</span>
+              <span style={{ fontSize: '14px' }}>{res.post_date}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>付款时间:</span>
+              <span style={{ fontSize: '14px' }}>{res.paid_date}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>订单物流:</span>
+              <span style={{ fontSize: '14px' }}>{'$' + res.order_shipping}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '15px', fontWeight: 'bold', color: '#3051AE' }}>买家备注:</span>
+              <span style={{ fontSize: '14px' }}>{res.note}</span>
+            </div>
+          </Card>
+        </Col>
 
-        </Row>
-        <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
-          <Button type="primary" >发货</Button>
-        </Row>
-      </Layout>
+      </Row>
+      <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
+        <Button type="primary" onClick={showModal} >发货</Button>
+        <Modal title="创建新订单" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+          <span>物流单号</span><Input placeholder="请输入物流单号" />
+        </Modal>
+      </Row>
     </Layout>
   );
 }

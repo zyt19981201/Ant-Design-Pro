@@ -209,7 +209,7 @@ const Login = (props) => {
               ]}
               onGetCaptcha={async (mobile) => {
                 const result = await getFakeCaptcha(mobile);
-
+                console.log('测试', mobile);
                 if (result === false) {
                   return;
                 }

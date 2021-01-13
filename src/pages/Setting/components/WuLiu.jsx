@@ -106,27 +106,6 @@ export default () => {
                 record: newRecord,
             }
             }
-        //   toolBarRender={() => [
-        //     <ProFormRadio.Group key="render" 
-        //       fieldProps={{
-        //         value: position,
-        //         onChange: (e) => setPosition(e.target.value),
-        //       }} 
-        //       options={[
-        //         {
-        //             label: '添加到顶部',
-        //             value: 'top',
-        //         },
-        //         {
-        //             label: '添加到底部',
-        //             value: 'bottom',
-        //         },
-        //         {
-        //             label: '隐藏',
-        //             value: 'hidden',
-        //         },
-        //       ]}/>,
-        //   ]}
         columns={columns} 
         
         cardBordered={true}
