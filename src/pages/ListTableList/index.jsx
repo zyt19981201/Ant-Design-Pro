@@ -224,7 +224,9 @@ const TableList = () => {
           </Button>,
         ]}
         request={async (params, sorter, filter) => {
+          console.log("1",params, sorter, filter);
           const res = await queryOrder({ ...params, sorter, filter })
+          console.log("3",res);
           return { data: res.data, success: true, total: 100 }
         }
         }

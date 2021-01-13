@@ -6,11 +6,19 @@ import {
   Interval,
   Tooltip as Tt
 } from 'bizcharts';
- 
 
+import {visitsReport} from "@/services/report"
+  const data =async()=>{
+    let res = await visitsReport({start:'2020-09-01 00:00',end:'2020-09-10 00:00'})
+    console.log("vvm",res.data);
+    return res.data
+  }
  
 const UsersNum=()=>{
-    const data = [
+ 
+   
+  // console.log("123",data())
+     const data=[
         { genre: 'Sports', sold: 275 },
         { genre: 'Strategy', sold: 155 },
         { genre: 'Action', sold: 230 },

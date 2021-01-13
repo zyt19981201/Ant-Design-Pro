@@ -5,11 +5,21 @@ import { Statistic, Card, Row, Col,Tooltip,Typography, Divider } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined, CarTwoTone } from '@ant-design/icons';
 import {InfoCircleOutlined} from '@ant-design/icons';
 // import Charts from '@/components/Charts';
+import {salesReport} from "@/services/report"
+ 
+const data=async ()=>{
+    const res=await salesReport({start:'2020-09-01 00:00',end:'2020-09-12 23:59'})
+    const count = res.data?.reduce((num,item)=>num+item.value,0)
+    console.log("data",res.data,count);
+    return {data:res.data };
+    }
 
-const DayBuys=()=>{
+const DayBuys=()=>{ 
+
+  // console.log(data());  
+
     return (  
-            
-     
+             
           <div style={{ width:'100%'}}>
             <Row>
               <Col span={20}>

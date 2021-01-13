@@ -1,10 +1,8 @@
-import React , { Component }from 'react';
+import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Typography, Col,Row,Button } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { Col,Row } from 'antd'; 
 import styles from './Welcome.less'; 
-import ProCard,{ProCardTabs} from '@ant-design/pro-card';
-// import { Line } from '@ant-design/charts';
+import ProCard  from '@ant-design/pro-card'; 
 import DayBuys from '@/components/Charts/DayBuys';
 import OrdersNum from '@/components/Charts/OrdersNum';
 import UsersNum from '@/components/Charts/UsersNum';
@@ -12,41 +10,10 @@ import UndeliveredOrders from '@/components/Charts/UndeliveredOders';
 import UpOrder from '@/components/Charts/UpOder';
 import UpUser from '@/components/Charts/UpUser';
 import UpBuys from '@/components/Charts/UpBuys';
-
-
-// const CodePreview = ({ children }) => (
-//   <pre className={styles.pre}>
-//     <code>
-//       <Typography.Text copyable>{children}</Typography.Text>
-//     </code>
-//   </pre>
-// );
+ 
 
 export default () => {
-  const intl = useIntl();
-  const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
-  ];
-
-  const config = {
-    data,
-    width: 300,
-    height:230,
-    xField: 'year',
-    yField: 'value',
-    point: {
-      size: 5,
-      shape: 'diamond',
-    },
-  };
+ 
   return (
     <PageContainer>  
         <ProCard direction="row" gutter={[18,18]} ghost> 

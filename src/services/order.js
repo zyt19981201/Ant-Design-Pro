@@ -20,7 +20,7 @@ export async function query({
       number
     }
   }
-
+  console.log("2");
   return request('/api/admin/orders', {
     params
   });

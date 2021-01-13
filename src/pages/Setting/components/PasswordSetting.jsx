@@ -3,6 +3,13 @@ import React from 'react'
 import {Form,Divider,Input,Button} from "antd"  
 import {FormattedMessage} from 'umi'
 import ProForm,{ ProFormText } from '@ant-design/pro-form';
+const waitTime = (time = 100) => {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          resolve(true);
+      }, time);
+  });
+};
 const PasswordSetting =()=>{
     const layout = {
         labelCol: {  offset: 2,span:  4},
@@ -11,13 +18,7 @@ const PasswordSetting =()=>{
       const tailLayout = {
         wrapperCol: { offset: 18, span: 4},
       };
-      const waitTime = (time = 100) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(true);
-            }, time);
-        });
-    };
+     
     return( 
         <ProForm
         

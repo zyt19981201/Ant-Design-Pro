@@ -56,24 +56,12 @@ export default () => {
             dataIndex: 'price',
             width:'30%',
             valueType: 'money',
-            // locale: 'en-Us'
-            // valueEnum: {
-            //     all: { text: '全部', status: 'Default' },
-            //     open: {
-            //         text: '未解决',
-            //         status: 'Error',
-            //     },
-            //     closed: {
-            //         text: '已解决',
-            //         status: 'Success',
-            //     },
-            // },
+          
         },
       
         {
             title: '操作',
-            valueType: 'option',
-            // width: 200,
+            valueType: 'option', 
             render: (text, record, _, action) => [
                 <a key="editable" onClick={() => {
                     var _a;
