@@ -78,8 +78,8 @@ export default () => {
     {
       key: '1',
       post_author: res.post_author,
-      post_name:res?.post_name,
-      post_title:res.post_title,
+      post_name: res?.post_name,
+      post_title: res.post_title,
       post_date: res.post_date,
       post_date_gmt: res.post_date_gmt,
       post_modified: res.post_modified,
@@ -197,30 +197,28 @@ export default () => {
   ];
 
   return (
-    <Layout>
-      <Layout >
-        <Row gutter={[16, 48]}>
-          <Col span={24} style={{ margin: '10px' }}>
-            <span>
-              商品编号:
-                </span>
-            <span>
-              {res.ID}
+    <Layout >
+      <Row gutter={[16, 48]}>
+        <Col span={24} style={{ margin: '10px' }}>
+          <span>
+            商品编号:
             </span>
-          </Col>
-          <Col span={24} style={{ margin: '10px' }}>
-            <Card title="商品详情" bordered={false}>
-              <Table pagination={false} dataSource={dataSource0} columns={columns0} />
-            </Card>
-            <Card title="商品发布信息" bordered={true}>
-              <Table pagination={false} dataSource={dataSource1} columns={columns1} />
-            </Card>
-          </Col>
-        </Row>
-        <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
-          <Button type="primary" >发货</Button>
-        </Row>
-      </Layout>
+          <span>
+            {res.ID}
+          </span>
+        </Col>
+        <Col span={24} style={{ margin: '10px' }}>
+          <Card title="商品详情" bordered={false}>
+            <Table pagination={false} dataSource={dataSource0} columns={columns0} />
+          </Card>
+          <Card title="商品发布信息" bordered={true}>
+            <Table pagination={false} dataSource={dataSource1} columns={columns1} />
+          </Card>
+        </Col>
+      </Row>
+      <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
+        <Button type="primary" >发货</Button>
+      </Row>
     </Layout>
   );
 }

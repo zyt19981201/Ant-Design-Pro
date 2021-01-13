@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Card, Col, Row,  Button, Divider} from 'antd';
+import { Layout, Card, Col, Row, Button, Divider } from 'antd';
 import { query as queryOrder } from '@/services/order';
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -26,16 +26,22 @@ export default () => {
   const dataSource0 = [
     {
       key: '1',
-      order_item_id:res?.line_items&&res.line_items[0]?.order_item_id,
-      order_item_name:res?.line_items&&res.line_items[0]?.order_item_name,
-      price:res?.line_items&&res.line_items[0]?.price,
-      qty:res?.line_items&&res.line_items[0]?.qty + '件',
-      line_subtotal_tax:res?.line_items&&res.line_items[0]?.line_subtotal_tax
+      order_item_id: res?.line_items && res.line_items[0]?.order_item_id,
+      order_item_name: res?.line_items && res.line_items[0]?.order_item_name,
+      price: res?.line_items && res.line_items[0]?.price,
+      qty: res?.line_items && res.line_items[0]?.qty + '件',
+      line_subtotal_tax: res?.line_items && res.line_items[0]?.line_subtotal_tax
     },
   ];
   const columns0 = [
     {
       title: '商品编号',
+      dataIndex: 'order_item_id',
+      key: 'order_item_id',
+      align: 'center'
+    },
+    {
+      title: '商品缩略图',
       dataIndex: 'order_item_id',
       key: 'order_item_id',
       align: 'center'
@@ -79,7 +85,7 @@ export default () => {
       order_total: res.order_currency + res.order_total,
       date: res.paid_date,
       username: res.billing_user_name,
-      note:res.note,
+      note: res.note,
     },
   ];
   const columns1 = [
@@ -230,62 +236,75 @@ export default () => {
   return (
     <Layout>
       <Layout >
-            <Row >
-              <Col span={18} style={{ margin: '10px' }}>
-                <span>
-                  订单编号:
+        <Row >
+          <Col span={18} style={{ margin: '10px' }}>
+            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>
+              订单编号:
                 </span>
-                <span>
-                  {res.ID}
-                </span>
-              </Col>
-              <Col span={18} style={{ margin: '10px' }}>
-                <Card title="商品详情" bordered={false}>
-                  <Table pagination={false} dataSource={dataSource0} columns={columns0} />
-                </Card>
-                <Card title="订单总览" bordered={true}>
-                  <Table pagination={false} dataSource={dataSource1} columns={columns1} />
-                </Card>
-                <Card title="订单详情" bordered={false}>
-                  <Table pagination={false} dataSource={dataSource2} columns={columns2} />
-                </Card>
-              </Col>
-              <Col style={{ margin: '10px' }} span={5}>
+            <span style={{ fontSize: '16px' }}>
+              {res.ID}
+            </span>
+          </Col>
+          <Col span={18} style={{ margin: '10px' }}>
+            <Card title="商品详情" bordered={false} >
+              <span style={{marginLeft:'70px'}}>商品图片:</span>
+              {res?.line_items && res?.line_items[0] && res?.line_items[0]?.feature_image && res?.line_items[0]?.feature_image.thumbnail &&  <img src={res?.line_items[0]?.feature_image.thumbnail} style={{ width: '100px', height: '100px',marginLeft:'50px' }} />}
+              <Divider />
+              <Table pagination={false} dataSource={dataSource0} columns={columns0} />
+            </Card>
+            <Card title="订单总览" bordered={true}>
+              <Table pagination={false} dataSource={dataSource1} columns={columns1} />
+            </Card>
+            <Card title="订单详情" bordered={false}>
+              <Table pagination={false} dataSource={dataSource2} columns={columns2} />
+            </Card>
+          </Col>
+          <Col style={{ margin: '10px' }} span={5}>
             <Card title="订单信息" bordered={false}>
               <div>
-                <span>订单状态:{res.post_status}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单状态:</span>
+                <span style={{fontSize:'14px'}}>{res.post_status}</span>
               </div>
               <div>
-              <span>订单金额:{'$' + res.order_total}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单金额:</span>
+                <span style={{fontSize:'14px'}}>{'$' + res.order_total}</span>
               </div>
               <Divider />
               <div>
-                <span>订单编号:{res.number}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单编号:</span>
+                <span style={{fontSize:'14px'}}>{res.number}</span>
               </div>
               <div>
-                <span>事务编号:{res.transaction_id}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>事务编号:</span>
+                <span style={{fontSize:'14px'}}>{res.transaction_id}</span>
               </div>
               <div>
-                <span>付款方式:{res.payment_method_title}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>付款方式:</span>
+                <span style={{fontSize:'14px'}}>{res.payment_method_title}</span>
               </div>
               <div>
-                <span>生成时间:{res.post_date}</span>
-              </div> 
-              <div>
-                <span>付款时间:{res.paid_date}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>生成时间:</span>
+                <span style={{fontSize:'14px'}}>{res.post_date}</span>
               </div>
               <div>
-                <span>订单物流:{'$' + res.order_shipping}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>付款时间:</span>
+                <span style={{fontSize:'14px'}}>{res.paid_date}</span>
               </div>
               <div>
-                <span>买家备注:{res.note}</span>
-              </div>             
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单物流:</span>
+                <span style={{fontSize:'14px'}}>{'$' + res.order_shipping}</span>
+              </div>
+              <div>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>买家备注:</span>
+                <span style={{fontSize:'14px'}}>{res.note}</span>
+              </div>
             </Card>
           </Col>
-            </Row>
-            <Row type="flex" justify="center" align="middle" style={{marginTop:'10px'}}>
-              <Button type="primary" >发货</Button>
-            </Row>
+
+        </Row>
+        <Row type="flex" justify="center" align="middle" style={{ marginTop: '10px' }}>
+          <Button type="primary" >发货</Button>
+        </Row>
       </Layout>
     </Layout>
   );

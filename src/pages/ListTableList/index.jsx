@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
+import { Button, message, Input, Drawer,Badge,Tag  } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage,history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -149,25 +149,25 @@ const TableList = () => {
       valueEnum: {
         "wc-cancelled": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.default" defaultMessage="已取消" />
+            <Badge status="error" id="pages.searchTable.nameStatus.default" text="已取消"/>
           ),
           status: 'wc-cancelled',
         },
         "wc-processing": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="运行中" />
+            <Badge status="processing" id="pages.searchTable.nameStatus.running" text="运行中"/>
           ),
           status: 'wc-processing',
         },
         "wc-completed": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.online" defaultMessage="完成" />
+            <Badge status="success" id="pages.searchTable.nameStatus.online" text="完成"/>
           ),
           status: 'wc-completed',
         },
         "wc-pending": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.abnormal" defaultMessage="待处理" />
+            <Badge status="warning" id="pages.searchTable.nameStatus.abnormal" text="异常"/>
           ),
           status: 'wc-pending',
         },
@@ -180,13 +180,15 @@ const TableList = () => {
       valueEnum: {
         "fulfilled": {
           text: (
-            <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
+            <Tag color="success" id="pages.searchTable.fulfilled">已发货</Tag>
+            // <FormattedMessage id="pages.searchTable.fulfilled" defaultMessage="已发货" />
           ),
           status: 'fulfilled',
         },
         "unfulfilled": {
           text: (
-            <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
+            <Tag color="error" id="pages.searchTable.unfulfilled">未发货</Tag>
+            // <FormattedMessage id="pages.searchTable.unfulfilled" defaultMessage="未发货" />
           ),
           status: 'unfulfilled',
         },

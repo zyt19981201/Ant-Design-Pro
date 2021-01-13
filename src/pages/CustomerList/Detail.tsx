@@ -247,26 +247,33 @@ export default () => {
               <Col style={{ margin: '10px' }} span={5}>
             <Card title="顾客订单地址" bordered={false}>
               <div>
-                <span>顾客编号:{res.ID}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>顾客编号:</span>
+                <span style={{fontSize:'14px'}}>{res.ID}</span>
               </div>
               <div>
-              <span>订单金额:{'$' + res.order_total}</span>
+              <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单金额:</span>
+              <span style={{fontSize:'14px'}}>{'$' + res.order_total}</span>
               </div>
               <div>
-              <span>订单数量:{res.order_count}</span>
+              <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>订单数量:</span>
+              <span style={{fontSize:'14px'}}>{res.order_count}</span>
               </div>
               <Divider />
               <div>
-                <span>用户昵称:{res.user_nicename}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>用户昵称:</span>
+                <span style={{fontSize:'14px'}}>{res.user_nicename}</span>
               </div>
               <div>
-                <span>用户地址:{res?.billing_address?.address_1}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>用户地址:</span>
+                <span style={{fontSize:'14px'}}>{res?.billing_address?.address_1}</span>
               </div>
               <div>
-                <span>用户电话:{res?.billing_address?.phone}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>用户电话:</span>
+                <span style={{fontSize:'14px'}}>{res?.billing_address?.phone}</span>
               </div>
               <div>
-                <span>用户邮箱:{res.user_email}</span>
+                <span style={{fontSize:'15px',fontWeight:'bold',color:'#3051AE'}}>用户邮箱:</span>
+                <span style={{fontSize:'14px'}}>{res.user_email}</span>
               </div>            
             </Card>
           </Col>

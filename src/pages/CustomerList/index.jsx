@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
+import { Button, message, Input, Drawer,Tag } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage,history } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -142,13 +142,14 @@ const TableList = () => {
       valueEnum: {
         "true": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.true" defaultMessage="已订阅" />
+            <Tag color="success" id="pages.searchTable.nameStatus.true">已订阅</Tag>
           ),
           status: 'true',
         },
         "false": {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.false" defaultMessage="未订阅" />
+            <Tag color="success" id="pages.searchTable.nameStatus.true">未订阅</Tag>
+            // <FormattedMessage id="pages.searchTable.nameStatus.false" defaultMessage="未订阅" />
           ),
           status: 'false',
         },
