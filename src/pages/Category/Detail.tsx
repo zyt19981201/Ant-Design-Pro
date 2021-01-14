@@ -31,7 +31,7 @@ export default () => {
   const [res, setRes] = useState({});
   let [loadings, setLoading] = useState(false);
   let [imageUrl, setImg] = useState();
-  let [headers, setHeaders] = useState("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYjY2MTEwZmZjYTY2NWY2MTgwOGZjMjA4ZjAwZWQxOGU0ZmU0ZTMzNTFlOGNkMjMxYWE5NWJlYWU3MDcwYjJkODg5NTQ0ZGY5YmVlZTlkZTEiLCJpYXQiOjE2MDg3ODEyMDksIm5iZiI6MTYwODc4MTIwOSwiZXhwIjoxNjQwMzE3MjA5LCJzdWIiOiIzIiwic2NvcGVzIjpbIioiXX0.Ml9XaYvW4ebNLlMk9yJr9EEow3kwvylGzV3L0IhRJC5CkZiY27SXmcFkzGsKCc6xkL1xs7s9hD3HlZSn6dMJ2UPidzyJHI0OAXNgQm8n4IkjmXAfdKFN0iJlVR4ZP-Mp8RtbK217NgDgo77FY4LOkHgrQx3MvifGseJQQYp21ZCKsTHaFSzByXkhaszF4yvwjgsWyt4tO7d_gbFwXiqfNZsBgTNyZk9BkjpwJX8KJn9T6I2dRNYecgC9PyAoKH6ZhOgqCpGAdPPemOo86YmFcjf34Rby6YUvy6ajjtHQNlhvBGKAz9f9YKbh2sqI-y_b4qBke227-tF86k50xO5PT_htGBy62WkKw1-LLCgAUqp-UzdHiNVMOZi-vprrf2NxIhzaX3zD0FMn6oU7pZDpeUGd5Nygt3Tdx1z_2yo5rpFBi6QwDaFtyiCD_ebq3v3lha4Z9YF411npUIwNQjXNmfalpKZjGxTRQmB5u75BGoNTe0Sp9XfZ0A6IX63XatuXeCMDR6A_9U_dN8IRteZmPpdbnoCLGfBrbfyx7VGK9s8aUy0jQuIw81ACtEUXPJkz_yM2WWcVmwBDumIXjZKGXoOcmcl80SYFBkXmlE7tOt1PV0S1sZRI-xYJLrgXFxR5_u0yCYpd9N8ZHRw7xVQXsCkM72JMvCtoFL7EHP8runs");
+  let [headers, setHeaders] = useState({ Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYjY2MTEwZmZjYTY2NWY2MTgwOGZjMjA4ZjAwZWQxOGU0ZmU0ZTMzNTFlOGNkMjMxYWE5NWJlYWU3MDcwYjJkODg5NTQ0ZGY5YmVlZTlkZTEiLCJpYXQiOjE2MDg3ODEyMDksIm5iZiI6MTYwODc4MTIwOSwiZXhwIjoxNjQwMzE3MjA5LCJzdWIiOiIzIiwic2NvcGVzIjpbIioiXX0.Ml9XaYvW4ebNLlMk9yJr9EEow3kwvylGzV3L0IhRJC5CkZiY27SXmcFkzGsKCc6xkL1xs7s9hD3HlZSn6dMJ2UPidzyJHI0OAXNgQm8n4IkjmXAfdKFN0iJlVR4ZP-Mp8RtbK217NgDgo77FY4LOkHgrQx3MvifGseJQQYp21ZCKsTHaFSzByXkhaszF4yvwjgsWyt4tO7d_gbFwXiqfNZsBgTNyZk9BkjpwJX8KJn9T6I2dRNYecgC9PyAoKH6ZhOgqCpGAdPPemOo86YmFcjf34Rby6YUvy6ajjtHQNlhvBGKAz9f9YKbh2sqI-y_b4qBke227-tF86k50xO5PT_htGBy62WkKw1-LLCgAUqp-UzdHiNVMOZi-vprrf2NxIhzaX3zD0FMn6oU7pZDpeUGd5Nygt3Tdx1z_2yo5rpFBi6QwDaFtyiCD_ebq3v3lha4Z9YF411npUIwNQjXNmfalpKZjGxTRQmB5u75BGoNTe0Sp9XfZ0A6IX63XatuXeCMDR6A_9U_dN8IRteZmPpdbnoCLGfBrbfyx7VGK9s8aUy0jQuIw81ACtEUXPJkz_yM2WWcVmwBDumIXjZKGXoOcmcl80SYFBkXmlE7tOt1PV0S1sZRI-xYJLrgXFxR5_u0yCYpd9N8ZHRw7xVQXsCkM72JMvCtoFL7EHP8runs" });
   // const headers = {Authorization:localStorage.getItem('token')}
   useEffect(async () => {
     // 更新文档的标题
@@ -47,14 +47,14 @@ export default () => {
 
   const handleChanges = info => {
     if (info.file.status === 'uploading') {
-      setLoading( true );
+      setLoading(true);
       return;
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj, imageUrl =>
         setLoading(
-         false
+          false
         ),
         setImg(
           imageUrl
@@ -94,7 +94,7 @@ export default () => {
     </div>
   );
   return (
-    
+
     <Layout>
       <Row>
         <Col span={24}>
