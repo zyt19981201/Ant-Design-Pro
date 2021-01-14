@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {Form,Divider,Input,Button} from "antd"  
+import {message,Divider,Input,Button} from "antd"  
 import {FormattedMessage} from 'umi'
 import ProForm,{ ProFormText } from '@ant-design/pro-form';
 const PasswordSetting =()=>{
@@ -38,9 +38,33 @@ const PasswordSetting =()=>{
         }}
         > 
           <Divider orientation="left">修改密码</Divider>
-          <ProFormText.Password label="当前密码" placeholder="请输入当前密码" name="input-password1" />
-          <ProFormText.Password label="新密码" placeholder="请输入当新密码" name="input-password2" />
-          <ProFormText.Password label="确认新密码" placeholder="请输入确认新密码" name="input-password3" />
+          <ProFormText.Password label="当前密码" 
+              placeholder="请输入当前密码"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入当前密码!',
+                }
+              ]}
+              name="input-password1" />
+          <ProFormText.Password label="新密码" 
+              placeholder="请输入当新密码" 
+              rules={[
+                {
+                  required: true,
+                  message: '请输入当新密码!',
+                }
+              ]}
+              name="input-password2" />
+          <ProFormText.Password label="确认新密码" 
+              placeholder="请输入确认新密码" 
+              rules={[
+                {
+                  required: true,
+                  message: '请输入确认新密码!',
+                }
+              ]}
+              name="input-password3" />
         </ProForm>
        
     )

@@ -12,13 +12,13 @@ import {
 const OrdersNum=({orders})=>{
 
   const d=[]
+  let o=0
   const count = () => {
-    let o=0
+    
     orders.map(item => {
       o += item.value
       d.push(item.value)
-    })
-    return o
+    }) 
   }
   // console.log('a',orders);
 
@@ -65,7 +65,7 @@ return(
       <Typography.Text  type="secondary">日均订单</Typography.Text> 
       </Col>
       <Col offset={3}>
-      <Typography.Text  type="secondary">{Math.floor(count()/orders.length)}</Typography.Text> 
+      <Typography.Text  type="secondary">{Math.floor(o/orders.length)}</Typography.Text> 
       </Col>
     </Row>
    

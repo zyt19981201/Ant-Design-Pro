@@ -54,14 +54,19 @@ import {
     },
     reducers: {
         reports(state, {payload}) {
-            const s=payload
-            // console.log("sales",s);
+            const arr=['sales','orders','visits']
+            const data=[]
+            arr.forEach(element => {
+                let val=payload.find((item)=>item.type===element)
+                data.push(val)
+            });
+            // console.log("sales",data[0],data[1],data[2]);
             return {
               ...state,
             report:payload,
-            sales:payload[0].data,
-            orders:payload[1].data,
-            visits:payload[2].data
+            sales:data[0].data,
+            orders:data[1].data,
+            visits:data[2].data
             };
         },
         // orders(state,action){

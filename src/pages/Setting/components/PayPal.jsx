@@ -18,9 +18,30 @@ const PayPal =()=>{
                         } 
                     }}
                 >  
-                    <ProFormText.Password label="当前密码" placeholder="请输入当前密码" name="input-password1" />
-                    <ProFormText.Password label="新密码" placeholder="请输入当新密码" name="input-password2" />
-                    <ProFormText.Password label="确认新密码" placeholder="请输入确认新密码" name="input-password3" />
+                    <ProFormText.Password label="Username" placeholder="请输入Username" 
+                        rules={[
+                            {
+                            required: true,
+                            message: '请输入Username!',
+                            }
+                        ]}
+                        name="input-password1" />
+                    <ProFormText.Password label="Password" placeholder="请输入Password"
+                        rules={[
+                            {
+                            required: true,
+                            message: '请输入Password!',
+                            }
+                        ]}
+                         name="input-password2" />
+                    <ProFormText.Password label="Signature" placeholder="请输入Signature" 
+                        rules={[
+                            {
+                            required: true,
+                            message: '请输入Signature!',
+                            }
+                        ]}
+                        name="input-password3" />
                 </ProForm>
             </ProCard>
             <ProCard colSpan="50%">

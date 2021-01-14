@@ -13,11 +13,11 @@ const UsersNum=({visits})=>{
      let v=0
     visits.map(item => {
       v += item.value
-      d.push(item.value)
+      d.push({datetime:item.datetime,value:item.value})
     })
     return v
    }
-  // console.log("123",c(),d)
+  console.log("123",c(),d)
   // const data=d
    const data=[
         { datatime: 'Sports', value: 275 },
@@ -42,7 +42,7 @@ return(
       </Col>
     </Row>
     <Row style={{  }}>
-      <Col><Statistic  value={6560} /></Col>
+      <Col><Statistic  value={c()} /></Col>
     </Row>
     <Row style={{ width: "100%", height: 50 }} >
         <Chart data={data} autoFit pure >
