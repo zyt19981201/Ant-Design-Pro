@@ -110,7 +110,7 @@ const Login = (props) => {
               ]}
             />
             <ProFormText.Password
-              name="password"
+              name=""
               fieldProps={{
                 size: 'large',
                 prefix: <LockTwoTone className={styles.prefixIcon} />,

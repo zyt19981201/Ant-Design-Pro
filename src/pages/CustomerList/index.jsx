@@ -148,7 +148,7 @@ const TableList = () => {
         },
         "false": {
           text: (
-            <Tag color="success" id="pages.searchTable.nameStatus.true">未订阅</Tag>
+            <Tag color="error" id="pages.searchTable.nameStatus.true">未订阅</Tag>
             // <FormattedMessage id="pages.searchTable.nameStatus.false" defaultMessage="未订阅" />
           ),
           status: 'false',
